@@ -1,17 +1,20 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: cbz-pod
+  name: my-pod
+  # namespace: my-namespace #------Adding pod to particular namespace
   labels:
-    app: cbz-app
+    app: my-app
     env: dev
 spec:
   containers:
-    - name: cbz-container
+    #1st Container
+    - name: my-container
       image: nginx
       ports:
         - containerPort: 80
 
+    #2nd Container
     - name: db-container
       image: mariadb
       ports:
@@ -19,3 +22,17 @@ spec:
       env:
         - name: MYSQL_ROOT_PASSWORD
           value: Redhat
+
+# apiVersion: v1 → Using core Kubernetes API
+# kind: Pod → We are creating a Pod
+# metadata → Information about the Pod
+# name → Pod name
+# labels → Used for grouping/selecting pods
+# spec → Actual configuration
+# containers → List of containers inside Pod
+# name → Container name
+# image → Docker image (here: nginx)
+# ports → Port exposed by container
+
+# kubectl apply -f pod.yaml
+# kubectl get pods
