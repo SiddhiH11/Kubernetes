@@ -20,6 +20,13 @@ spec:
     #   app: rs-app
     matchExpressions:
       - { key: app, operator: In, values: [cbz-app, ds-app] }
+
+
+# kind: DaemonSet → Ensures 1 Pod runs on each node
+# No need to define replicas
+# selector → Matches labels
+# template → Pod configuration
+
 ---
 apiVersion: v1
 kind: Service

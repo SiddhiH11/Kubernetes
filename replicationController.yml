@@ -3,13 +3,13 @@ kind: ReplicationController
 metadata:
   name: my-rc
   labels:
-    app: cbz-app
+    app: my-app
 spec:
   replicas: 3
   template:
     metadata:
       labels:
-        app: cbz-app
+        app: my-app
     spec:
       containers:
         - name: my-c
@@ -17,7 +17,20 @@ spec:
           ports:
             - containerPort: 80
   selector:
-    app: cbz-app
+    app: my-app
+
+
+# kind: ReplicationController → Ensures specified number of Pods are running
+# replicas: 3 → Maintains 3 Pods at all times
+# selector → Matches Pods with label app: my-app
+# template → Blueprint for creating Pods
+#            Contains metadata + spec of Pod
+
+# kubectl apply -f replicationController.yml
+# kubectl get rc
+# kubectl get pods
+
+# kubectl scale rc my-rc --replicas=5  -------scaling rc
 
 ---
 apiVersion: v1
@@ -25,7 +38,7 @@ kind: Service
 metadata:
   name: my-svc
   labels:
-    app: cbz-app
+    app: my-app
 spec:
   ports:
     - port: 80
@@ -33,4 +46,4 @@ spec:
       protocol: TCP
   type: NodePort
   selector:
-    app: cbz-app
+    app: my-app

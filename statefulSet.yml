@@ -23,6 +23,21 @@ spec:
     matchLabels:
       app: sts-app
 
+
+# kind: StatefulSet → Used for stateful applications
+# serviceName → Required (points to a Headless Service)
+# replicas: 3 → Creates 3 Pods
+
+# Pods are created with stable names:
+# my-statefulset-0
+# my-statefulset-1
+# my-statefulset-2
+
+# Each Pod gets:
+# Unique identity
+# Stable hostname
+# Persistent storage (if configured)
+
 ---
 apiVersion: v1
 kind: Service

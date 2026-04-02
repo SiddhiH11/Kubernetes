@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mypv
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: default
+  awsElasticBlockStore:
+    volumeID: vol-0344070373dc244fa
+    fsType: ext4
+
+# apiVersion: v1 → Core Kubernetes API
+
+# kind: PersistentVolume → Creating a cluster-level storage
+
+# name: mypv → Unique name of the PV inside cluster
+
+# capacity:
+# PV size = 10 GB
+# This is the maximum storage available
+
+# volumeMode: Storage will be mounted as a filesystem
+# Alternative:
+# Block → raw block device (advanced use)
+
+# accessModes: ReadWriteOnce
+# Only one node can mount it as read-write
+# Other types:
+# ReadOnlyMany
+# ReadWriteMany
+
+# persistentVolumeReclaimPolicy: Retain
+# When PVC is deleted:
+# ❌ Data is NOT deleted
+# ✅ Volume remains for manual reuse
+# Other options:
+# Delete → deletes storage automatically
+# Recycle → deprecated
+
+# storageClassName: default
+# Links PV with a StorageClass
+# PVC must request same class to bind
+
+# awsElasticBlockStore:
+#   volumeID: vol-0344070373dc244fa
+#   fsType: ext4

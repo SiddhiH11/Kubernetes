@@ -3,13 +3,13 @@ kind: ReplicaSet
 metadata:
   name: my-rs
   labels:
-    app: rs-app
+    app: my-app
 spec:
   replicas: 6
   template:
     metadata:
       labels:
-        app: rs-app
+        app: my-app
     spec:
       containers:
         - name: my-c
@@ -18,9 +18,25 @@ spec:
             - containerPort: 80
   selector:
     # matchLabels:
-    #   app: rs-app
+    #   app: my-app
     matchExpressions:
-      - { key: app, operator: In, values: [cbz-app, rs-app] }
+      - { key: app, operator: In, values: [cbz-app, my-app] }
+
+
+# apiVersion: apps/v1 → Required for ReplicaSet
+# kind: ReplicaSet → Ensures desired number of Pods
+# replicas: 3 → Maintains 3 running Pods
+# selector.matchLabels → Matches Pods with label app: myapp
+# template → Blueprint for Pod creation
+#            Must match selector labels
+
+# kubectl apply -f replicaSet.yml
+
+# kubectl get rs
+# kubectl get pods
+
+# kubectl scale rs my-replicaset --replicas=5 ----scaling rs
+
 ---
 apiVersion: v1
 kind: Service
@@ -35,4 +51,4 @@ spec:
       protocol: TCP
   type: NodePort
   selector:
-    app: rs-app
+    app: my-app

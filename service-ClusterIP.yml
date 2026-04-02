@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-svc
+  labels:
+    app: my-app
+    env: dev
+spec:
+  selector:
+    app: my-app
+  type: ClusterIP
+  ports:
+    - port: 80 #Service port
+      targetPort: 80 #Pod container port
+      protocol: TCP
+
+# kind: Service → Creates a Kubernetes Service
+# selector → Matches Pods with label app: myapp
+# port → Service port (internal cluster access)
+# targetPort → Port on Pod container
+# type: ClusterIP → Default (accessible inside cluster only)
+
+# kubectl apply -f service-ClusterIP.yaml
+# kubectl get svc

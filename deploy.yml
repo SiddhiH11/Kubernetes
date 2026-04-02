@@ -23,6 +23,20 @@ spec:
     #   app: rs-app
     matchExpressions:
       - { key: app, operator: In, values: [cbz-app, 123-app] }
+
+
+# kind: Deployment → Manages Pods & ReplicaSets
+# replicas: 3 → Runs 3 Pods
+# selector → Matches Pods with labels
+# template → Pod blueprint
+# containers.image → Docker image (nginx here)
+
+# kubectl apply -f deploy.yml
+
+# kubectl get deployments
+# kubectl get pods
+# kubectl get rs
+
 ---
 apiVersion: v1
 kind: Service

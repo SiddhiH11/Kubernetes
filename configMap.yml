@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-cm
+data:
+  mysql_pass: "Redhat@123"
+  mysql_user: "root"
+  mysql_host: "192.168.0.11"
+  mysql_data: "/var/lib/mysql"
+
+
+# kind: ConfigMap → Stores configuration data
+# data → Key-value pairs
+# Can store:
+# Plain values (DB_HOST)
+# Files (app.properties)
+
+# kubectl get configmaps
+# kubectl describe configmap my-config
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmap-pod
+spec:
+  containers:
+    - name: my-container
+      image: nginx
+      env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: my-cm
+              key: mysql_host
